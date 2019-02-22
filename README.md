@@ -1,5 +1,5 @@
-
 # vue-trello
+
 ## study
 
 ### 트렐로 개발을 통한 Vuejs, Vuex, Vue-Router 개발 
@@ -42,9 +42,9 @@
      - vanilla js
 - [Vue.js](https://vuejs.org/)
 - [lite-server](https://github.com/johnpapa/lite-server)
-- [Dragula]
-- [Axios]
-- [Vue-Router]
+- [Dragula]()
+- [Axios]()
+- [Vue-Router]()
 
 
 ## References
