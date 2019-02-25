@@ -17,7 +17,6 @@ export default {
 }
 </script>
 <style>
-<style>
 html, body, #app {
   height: 100%;
   margin: 0px;
@@ -66,4 +65,3 @@ textarea.form-control {
   background-color: #fff;
 }
 </style>
-
