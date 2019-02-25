@@ -61,10 +61,8 @@ export default {
         },addBoard(){
             this.$store.commit('SET_IS_ADD_BOARD',true)
         },
-        onAddBoard(title){
-            //api 호출
-            board.create(title)
-             .then(()=>this.fetchData())
+        onAddBoard(){
+            this.fetchData()
         }
 
     }
