@@ -1,20 +1,20 @@
 <template>
-    <div>
-        <div class="board-wrapper">
-            <div class="board">
-                <div class="board-header">
-                    <span class="board-title">{{board.title}}</span>
-                </div>
-                <div class="list-section-wrapper">
-                    <div class="list-section">
-                        <div class="list-wrapper" v-for="list in board.lists" :key ="list.pos">
-                            <List :data="list" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+ <div>
+    <div class="board-wrapper">
+      <div class="board">
+        <div class="board-header">
+          <span class="board-title">{{board.title}}</span>
         </div>
+        <div class="list-section-wrapper">
+          <div class="list-section">
+            <div class="list-wrapper" v-for="list in board.lists" :key="list.pos">
+                <List :data="list" />
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 import {mapState,mapActions} from 'vuex'
