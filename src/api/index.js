@@ -1,4 +1,3 @@
-//back end 라이브러리 호출 js
 import axios from 'axios'
 import router from '../router'
 
@@ -27,12 +26,19 @@ export const setAuthInHeader = token => {
 
 export const board = {
   fetch(id) {
-    return id ? request('get', `/boards/${id}` ) : request('get','/boards')
+    return id ? request('get', `/boards/${id}`) : request('get', '/boards') 
   },
-  create(title){
-      return request('post','/boards/',{title})
+  create(title) {
+    return request('post', '/boards', {title})
   }
 }
+
+export const card = {
+  create(title, listId, pos) {
+    return request('post', '/cards', {title, listId, pos})
+  }
+}
+
 export const auth = {
   login(email, password) {
     return request('post', '/login', {email, password}) 

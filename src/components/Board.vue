@@ -1,5 +1,5 @@
 <template>
- <div>
+  <div>
     <div class="board-wrapper">
       <div class="board">
         <div class="board-header">
@@ -16,43 +16,41 @@
     </div>
   </div>
 </template>
+
 <script>
-import {mapState,mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 import List from './List.vue'
 export default {
-    components:{
-        List
-    },
-    data(){
-        return{
-            bid:0,
-            loading:false
-
-        }
-    },
-    computed: {
-        ...mapState({
-            board:'board'
-        })
-    },
-    created() {
-        this.fetchData()
-    },
-    methods:{
-        ...mapActions([
-            'FETCH_BOARD'
-        ]),
-        fetchData(){
-            this.loading = true
-            this.FETCH_BOARD({id:this.$route.params.bid})
-                .then(()=> this.loading = false)
-           
-        }
+  components: { List },
+  data() {
+    return {
+      bid: 0,
+      loading: false
     }
+  },
+  computed: {
+    ...mapState({
+      board: 'board'
+    })
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    ...mapActions([
+      'FETCH_BOARD'
+    ]),
+    fetchData() {
+      this.loading = true
+      this.FETCH_BOARD({id: this.$route.params.bid})
+        .then(() => this.loading = false)
+    }
+  }
 }
 </script>
+
 <style>
-    .board-wrapper {
+.board-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;

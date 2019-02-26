@@ -8,30 +8,39 @@
     </form>
   </div>
 </template>
+
 <script>
+import {mapActions} from 'vuex'
 export default {
+  props: ['listId'],
   data() {
     return {
       inputTitle: ''
     }
   },
- computed: {
+  computed: {
     invalidInput() {
       return !this.inputTitle.trim()
     }
   },
   mounted() {
-      this.$refs.inputText.focus()
-      this.setupClickOutside(this.$el)
+    this.$refs.inputText.focus()
+    this.setupClickOutside(this.$el)
   },
   methods: {
-      onSubmit(){
-          console.log('onSubmit!!')
-       },
-       setupClickOutside(el) {
-         document.querySelector('body').addEventListener('click', e => {
-         if (el.contains(e.target)) return
-        //  this.$emit('close')
+    ...mapActions([
+      'ADD_CARD'
+    ]),
+    onSubmit() {
+      if (this.invalidInput) return 
+      const {inputTitle, listId} = this
+      this.ADD_CARD({title: inputTitle, listId})
+        .finally(_=> this.inputTitle = '')
+    },
+    setupClickOutside(el) {
+      document.querySelector('body').addEventListener('click', e => {
+        if (el.contains(e.target)) return 
+        //this.$emit('close')
       })
     }
   }
