@@ -69,21 +69,21 @@ methods: {
 
 <style>
 .modal-card .modal-container {
-    min-width: 300px;
-    max-width: 800px;
-    width: 60%;
+  min-width: 300px;
+  max-width: 800px;
+  width: 60%;
 }
 .modal-card-header-title {
-    padding-right: 30px;
+  padding-right: 30px;  
 }
 .modal-close-btn {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    font-size: 24px;
-    text-decoration: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 24px;
+  text-decoration: none;
 }
 .modal-card-header {
-    position: relative;
+  position: relative;
 }
 </style>

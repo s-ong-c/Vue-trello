@@ -32,22 +32,24 @@ export default {
         }
     },
     computed: {
-       ... mapState({
-        isAddBoard: 'isAddBoard',
-        boards:'boards'
-       })
-    },
-        created() {
-            this.fetchData()
+        ... mapState({
+          isAddBoard: 'isAddBoard',
+          boards:'boards'
+        })
+      },
+    created() {
+        this.fetchData()
+        this.SET_THEME()
         },
-        updated() {
-            this.$refs.boardItem.forEach(el => {
-            el.style.backgroundColor = el.dataset.bgcolor
-            })
+    updated() {
+        this.$refs.boardItem.forEach(el => {
+         el.style.backgroundColor = el.dataset.bgcolor
+       })
     },
     methods: {
         ...mapMutations([
-            'SET_IS_ADD_BOARD'
+            'SET_IS_ADD_BOARD',
+            'SET_THEME'
         ]),
         ...mapActions([
             'FETCH_BOARDS'
