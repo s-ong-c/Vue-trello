@@ -11,7 +11,8 @@
         </div>
         <div class="list-section-wrapper">
           <div class="list-section">
-            <div class="list-wrapper" v-for="list in board.lists" :key="list.pos">
+            <div class="list-wrapper" v-for="list in board.lists" :key="list.pos"
+              :data-list-id="list.id">
                 <List :data="list" />
               </div>
               <div class="list-wrapper">
@@ -43,6 +44,7 @@ export default {
       bid: 0,
       loading: false,
       cDragger: null,
+      lDragger:null,
       isEditTitle:false,
       inputTitle:''
     }
@@ -61,7 +63,8 @@ export default {
      this.SET_IS_SHOW_BOARD_SETTINGS(false)
   },
   updated() {
-    this.setCardDragabble()
+    this.setCardDragabble(),
+    this.setListDragabble()
 
   },
   methods: {
@@ -72,7 +75,8 @@ export default {
     ...mapActions([
       'FETCH_BOARD',
       'UPDATE_CARD',
-      'UPDATE_BOARD'
+      'UPDATE_BOARD',
+      'UPDATE_LIST'
     ]),
     fetchData() {
       this.loading = true
@@ -84,7 +88,8 @@ export default {
       this.cDragger = dragger.init(Array.from(this.$el.querySelectorAll('.card-list')))
       this.cDragger.on('drop',(el, wrapper,target,siblings)=>{
       const targetCard ={
-        id: el.dataset.cardId * 1,
+        id: el.dataset.listId * 1,
+        listId: wrapper.dataset.listId * 1,
         pos: 65535,
       }
       const {prev , next} = dragger.siblings({
@@ -99,6 +104,35 @@ export default {
         else if(next && prev) targetCard.pos = (next.pos + prev.pos) / 2
 
         this.UPDATE_CARD(targetCard)
+     })
+    },
+    setListDragabble(){
+       if(this.lDragger) this.lDragger.destroy()
+
+      const options = {
+        invalid: (el, handle)=> !/^list/.test(handle.className)
+      }
+      this.lDragger = dragger.init(
+        Array.from(this.$el.querySelectorAll('.list-section')),
+        options
+        )
+      this.lDragger.on('drop',(el, wrapper,target,siblings)=>{
+      const targetList ={
+        id: el.dataset.listId * 1,
+        pos: 65535,
+      }
+      const {prev , next} = dragger.siblings({
+        el, 
+        wrapper,
+        candidates: Array.from(wrapper.querySelectorAll('.list')),
+        type: 'list'
+      })
+
+        if( !prev && next) targetList.pos = next.pos / 2
+        else if(!next && prev) targetList.pos = prev.pos * 2
+        else if(next && prev) targetList.pos = (next.pos + prev.pos) / 2
+
+        this.UPDATE_LIST(targetList)
      })
     },
     onShowSettings(){
