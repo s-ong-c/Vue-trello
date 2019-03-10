@@ -35,6 +35,10 @@ const actions ={
         return api.card.create(title,listId,pos)
             .then(_=> dispatch('FETCH_BOARD',{id:state.board.id}))
     },
+    UPDATE_LIST({dispatch,state},{id,pos,title}){
+        return api.list.update(id,{pos,title})
+            .then(_=> dispatch('FETCH_BOARD',{id:state.board.id}))
+    },
     FETCH_CARD({commit},{id}){
         return api.card.fetch(id).then(data =>{
             commit('SET_CARD',data.item)
