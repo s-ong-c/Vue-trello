@@ -23,12 +23,17 @@ const actions ={
     },
     UPDATE_BOARD({dispatch,state},{id,title,bgColor}){
         return api.board.update(id,{title,bgColor})
-            .then(()=> dispatch('FETCH_BOARD',{id: state.board.id}))
+            .then(_=> dispatch('FETCH_BOARD',{id: state.board.id}))
     },
+
+    ADD_LIST({dispatch,state},{title,boardId,pos}){
+        return api.list.create({list, boardId, pos})
+        .then(_=> dispatch('FETCH_BOARD',{id:state.board.id}))
+    }, 
 
     ADD_CARD ({dispatch,state},{title,listId, pos}){
         return api.card.create(title,listId,pos)
-            .then(()=> dispatch('FETCH_BOARD',{id:state.board.id}))
+            .then(_=> dispatch('FETCH_BOARD',{id:state.board.id}))
     },
     FETCH_CARD({commit},{id}){
         return api.card.fetch(id).then(data =>{
